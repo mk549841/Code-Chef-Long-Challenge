@@ -1,0 +1,46 @@
+import heapq as hq
+for _ in range(int(input())):
+    d=0
+    t=0
+    c=0
+    n,x=map(int,input().split())
+    a=list(map(int,input().split()))
+    hq.heapify(a)
+    a=[hq.heappop(a) for i in range(len(a))]
+    if x in a:
+        t=a.index(x)
+    else:
+        for i in a:
+            if x>i:
+                c+=1
+        t=c
+    for i in range(t,n,1):
+        if x<a[i]:
+            while x<a[i]:
+                x=2*x
+                d+=1
+            d+=1
+        else:
+            d+=1
+        x=2*a[i]
+    t1=t+d
+    if t!=0:
+        d=0
+        t=t-1
+        for i in range(t,n,1):
+            if x<a[i]:
+                while x<a[i]:
+                    x=2*x
+                    d+=1
+                d+=1
+            else:
+                d+=1
+            x=2*a[i]
+        if d+t<t1:
+            print(d+t)
+        else:
+            print(t1)
+    else:
+        print(t1)
+
+    
